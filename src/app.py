@@ -12,6 +12,7 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 
+
 #from models import Person
 
 ENV = os.getenv("FLASK_ENV")
@@ -32,6 +33,10 @@ db.init_app(app)
 
 # Allow CORS requests to this API
 CORS(app)
+
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+jwt = JWTManager(app)
 
 # add the admin
 setup_admin(app)
@@ -63,6 +68,29 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0 # avoid cache memory
     return response
 
+@app.route("/login", methods=["POST"])
+def login():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    if email != "test" or password != "test":
+        return jsonify({"msg": "Bad email or password"}), 401
+
+        user = User.query.filter_by(email=email).first()
+        print(user)
+
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token), 200
+
+
+@app.route("/user", methods=["GET"])
+@jwt_required()
+def get_user():
+    # Access the identity of the current user with get_jwt_identity
+    current_user_email = get_jwt_identity()
+    user = User.query.filter_by(email=current_user_email).first()
+    print(user)
+
+    return jsonify(logged_in_as=current_user_email), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
