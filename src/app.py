@@ -73,28 +73,7 @@ def sitemap():
 #     response.cache_control.max_age = 0 # avoid cache memory
 #     return response
 
-@app.route("/login", methods=["POST"])
-def login():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    if email != "test" or password != "test":
-        return jsonify({"msg": "Bad email or password"}), 401
 
-        user = User.query.filter_by(email=email).first()
-        print(user)
-
-    access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token), 200
-
-
-# Protect a route with jwt_required, which will kick out requests
-# without a valid JWT present.
-@app.route("/protected", methods=["GET"])
-@jwt_required()
-def protected():
-    # Access the identity of the current user with get_jwt_identity
-    current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
 
 
 @app.route("/user", methods=["GET"])
