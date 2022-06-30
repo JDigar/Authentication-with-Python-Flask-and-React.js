@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -23,31 +25,32 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       login: (email, password) => {
-        fetch(
-          "https://3001-jdigar-authenticationwi-e7c1qfxuww3.ws-eu47.gitpod.io/api/login",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              email: email,
-              password: password,
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        fetch(process.env.BACKEND_URL + "/api/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((response) => {
             if (response.status === 200) {
-              setStore({ auth: true });
+              setStore({
+                auth: true,
+              });
             }
-            response.json();
+            return response.json();
           })
           .then((data) => localStorage.setItem("token", data.access_token));
       },
 
       logout: () => {
         localStorage.removeItem("token");
-        setStore({ auth: false });
+        setStore({
+          auth: false,
+        });
       },
 
       getMessage: async () => {
@@ -55,13 +58,20 @@ const getState = ({ getStore, getActions, setStore }) => {
           // fetching data from the backend
           const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
           const data = await resp.json();
-          setStore({ message: data.message });
+          setStore({
+            message: data.message,
+          });
           // don't forget to return something, that is how the async resolves
           return data;
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
       },
+
+      loginbtn: () => {
+        <Redirect to="/login" />;
+      },
+
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
@@ -74,7 +84,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
 
         //reset the global store
-        setStore({ demo: demo });
+        setStore({
+          demo: demo,
+        });
       },
     },
   };

@@ -1,18 +1,21 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const sampleLocation = useLocation();
 
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container">
-        <Link to="/">
-          <button className="btn btn-primary">Sign up</button>
-        </Link>
+        {sampleLocation.pathname === "/" ? null : (
+          <Link to="/">
+            <button className="btn btn-primary">Sign up</button>
+          </Link>
+        )}
+
         <div className="ml-auto">
-          {/* <Link to="/signup"> */}
           {store.auth === true ? (
             <button
               onClick={() => actions.logout()}
@@ -21,11 +24,10 @@ export const Navbar = () => {
               Logout
             </button>
           ) : (
-            <button className="btn btn-primary" to="/login">
-              Log in
-            </button>
+            <Link to="/login">
+              <button className="btn btn-primary">Log in</button>
+            </Link>
           )}
-          {/* </Link> */}
         </div>
       </div>
     </nav>
