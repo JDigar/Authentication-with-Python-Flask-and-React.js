@@ -1,5 +1,3 @@
-import { Navigate } from "react-router-dom";
-
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -17,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       auth: false,
+      // register: true
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -24,8 +23,45 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
 
+      // LOGIN
       login: (email, password) => {
-        fetch(process.env.BACKEND_URL + "/api/login", {
+        // console.log(email, password);
+        fetch(
+          "https://3001-jdigar-authenticationwi-86etcwlcbp9.ws-eu72.gitpod.io/api/login",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              email: email,
+              password: password,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((response) => {
+            if (response.status === 200) {
+              setStore({
+                auth: true,
+              });
+            } else if (response.status === 404) {
+              alert("usuario no existe");
+              // console.log(response.text());
+            } else {
+              alert("email o contraseña incorrecta");
+            }
+
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("token", data.access_token);
+          });
+      },
+
+      // REGISTRO
+      registration(email, password) {
+        fetch(process.env.BACKEND_URL + "/api/user", {
           method: "POST",
           body: JSON.stringify({
             email: email,
@@ -36,16 +72,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         })
           .then((response) => {
-            if (response.status === 200) {
-              setStore({
-                auth: true,
-              });
-            }
             return response.json();
           })
-          .then((data) => localStorage.setItem("token", data.access_token));
+          .then((data) => {
+            console.log(data);
+          });
       },
 
+      // LOGOUT
       logout: () => {
         localStorage.removeItem("token");
         setStore({
@@ -67,11 +101,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
-
-      loginbtn: () => {
-        <Redirect to="/login" />;
-      },
-
       changeColor: (index, color) => {
         //get the store
         const store = getStore();

@@ -17,7 +17,7 @@ export const Login = () => {
 
   return (
     <>
-      {store.auth ? (
+      {store.auth === true ? (
         <Navigate to="/profile" />
       ) : (
         <div className="container-fluid col-4 p-5">
