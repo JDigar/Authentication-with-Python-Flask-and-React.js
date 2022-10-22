@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       auth: false,
-      // register: true
+      register: true,
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -26,19 +26,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       // LOGIN
       login: (email, password) => {
         // console.log(email, password);
-        fetch(
-          "https://3001-jdigar-authenticationwi-86etcwlcbp9.ws-eu72.gitpod.io/api/login",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              email: email,
-              password: password,
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        fetch(process.env.BACKEND_URL + "/api/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((response) => {
             if (response.status === 200) {
               setStore({
@@ -60,7 +57,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       // REGISTRO
-      registration(email, password) {
+      signup: (email, password) => {
         fetch(process.env.BACKEND_URL + "/api/user", {
           method: "POST",
           body: JSON.stringify({
