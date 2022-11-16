@@ -9,19 +9,23 @@ export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const inicioSesion = () => {
+    <Navigate to="/login" />;
+  };
   const handleSubmit2 = (e) => {
     e.preventDefault(), actions.signup(email, password);
     Swal.fire({
       title: "¡ENHORABUENA!",
       html: "Te hemos fichado ;)",
+      h1: "Ya puedes iniciar sesión",
+      footer: '<a class="btn" href="/login">INICIAR SESIÓN</a>',
       width: 600,
       padding: "3em",
       showConfirmButton: false,
-      timer: 2000,
       color: "#000000",
       icon: "success",
       backdrop: `
-        rgba(0, 133, 138, 0.3)
+        rgba(0, 133, 138, 0.2)
 
       `,
     });
