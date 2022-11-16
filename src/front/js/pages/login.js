@@ -51,7 +51,7 @@ export const Login = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn">
               Login
             </button>
           </form>
