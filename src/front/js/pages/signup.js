@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Navigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const Signup = () => {
   const { store, actions } = useContext(Context);
@@ -11,21 +10,19 @@ export const Signup = () => {
   const [password, setPassword] = useState("");
 
   const handleSubmit2 = (e) => {
-    e.preventDefault();
-    actions.signup(email, password);
-    Navigate("/login");
-
+    e.preventDefault(), actions.signup(email, password);
     Swal.fire({
       title: "¡ENHORABUENA!",
-      html: "Ahora formas parte de la RUTA-3B'S",
+      html: "Te hemos fichado ;)",
       width: 600,
       padding: "3em",
+      showConfirmButton: false,
+      timer: 2000,
       color: "#000000",
-      confirmButtonColor: "#ffc843",
       icon: "success",
       backdrop: `
-        rgba(255, 200, 67,0.3)
-        
+        rgba(0, 133, 138, 0.3)
+
       `,
     });
   };
@@ -67,20 +64,8 @@ export const Signup = () => {
                 id="exampleInputPassword1"
               />
             </div>
-            {/* <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Repear your password
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="form-control"
-                id="exampleInputPassword1"
-              />
-            </div> */}
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn">
               Sign up
             </button>
           </form>

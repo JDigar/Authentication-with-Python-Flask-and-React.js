@@ -9,27 +9,25 @@ export const Navbar = () => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container">
+        {" "}
         {sampleLocation.pathname === "/" ? null : (
           <Link to="/">
-            <button className="btn btn-primary">Sign up</button>
+            <button className="btn"> Sign up </button>{" "}
           </Link>
         )}
-
         <div className="ml-auto">
+          {" "}
           {store.auth === true ? (
-            <button
-              onClick={() => actions.logout()}
-              className="btn btn-primary"
-            >
-              Logout
+            <button onClick={() => actions.logout()} className="btn">
+              Logout{" "}
             </button>
           ) : (
             <Link to="/login">
-              <button className="btn btn-primary">Log in</button>
+              <button className="btn"> Log in </button>{" "}
             </Link>
-          )}
-        </div>
-      </div>
+          )}{" "}
+        </div>{" "}
+      </div>{" "}
     </nav>
   );
 };
