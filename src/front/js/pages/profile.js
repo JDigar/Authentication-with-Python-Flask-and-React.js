@@ -12,8 +12,12 @@ export const Profile = () => {
     <>
       {" "}
       {store.auth ? (
-        <div className="container-fluid col-4 p-5">
-          <h1> Your profile </h1>{" "}
+        <div className="container-fluid col-md-10 col-xs-4 col-sm-4 p-5">
+          <h1 className="text-center"> Welcome my friend! </h1>{" "}
+          <p className="text-center pt-5 font-italic lead">
+            This is your profile, this is really useless but I made it for you
+            :){" "}
+          </p>
         </div>
       ) : (
         <Navigate to="/login" />

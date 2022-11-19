@@ -36,8 +36,8 @@ export const Signup = () => {
       {store.auth ? (
         <Navigate to="/login" />
       ) : (
-        <div className="container-fluid col-4 p-5">
-          <h1>Sign up!</h1>
+        <div className="box container-fluid col-md-5 col-xs-4 col-sm-2 well p-5">
+          <h1 className="text-center">Sign Up</h1>
 
           <form onSubmit={handleSubmit2}>
             <div className="mb-3">

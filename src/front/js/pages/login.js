@@ -20,8 +20,8 @@ export const Login = () => {
       {store.auth === true ? (
         <Navigate to="/profile" />
       ) : (
-        <div className="container-fluid col-4 p-5">
-          <h1>Login!</h1>
+        <div className="box container-fluid col-md-5 col-xs-4 col-sm-2 well p-5">
+          <h1 className="text-center">Login</h1>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">

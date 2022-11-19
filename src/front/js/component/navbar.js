@@ -7,7 +7,7 @@ export const Navbar = () => {
   const sampleLocation = useLocation();
 
   return (
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar">
       <div className="container">
         {" "}
         {sampleLocation.pathname === "/" ? null : (
