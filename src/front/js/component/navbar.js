@@ -10,11 +10,23 @@ export const Navbar = () => {
     <nav className="navbar">
       <div className="container">
         {" "}
-        {sampleLocation.pathname === "/" ? null : (
+        <div className="ml-auto">
+          {" "}
+          {store.auth === true ? (
+            <Link to="/home">
+              <button className="btn"> Home </button>{" "}
+            </Link>
+          ) : (
+            <Link to="/">
+              <button className="btn"> Sign Up </button>{" "}
+            </Link>
+          )}{" "}
+        </div>{" "}
+        {/* {sampleLocation.pathname === "/" ? null : (
           <Link to="/">
             <button className="btn"> Sign up </button>{" "}
           </Link>
-        )}
+        )} */}
         <div className="ml-auto">
           {" "}
           {store.auth === true ? (

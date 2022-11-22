@@ -48,6 +48,7 @@ export const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-control"
                 id="exampleInputPassword1"
+                required
               />
             </div>
 

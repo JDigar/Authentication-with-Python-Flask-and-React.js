@@ -51,7 +51,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json();
           })
           .then((data) => {
-            console.log(data);
             localStorage.setItem("token", data.access_token);
           });
       },
