@@ -23,8 +23,8 @@ value: https://3001-jdigar-authenticationwi-rj6zwsz6sd5.ws-eu81.gitpod.io
 fromDatabase:
 name: postgresql-trapezoidal-42170
 property: connectionString
- databases: # Render PostgreSQL database
- - name: postgresql-trapezoidal-42170
- region: ohio
- ipAllowList: [] # only allow internal connections
- plan: free # optional; defaults to starter
+databases: # Render PostgreSQL database
+- name: postgresql-trapezoidal-42170
+region: ohio
+ipAllowList: [] # only allow internal connections
+plan: free # optional; defaults to starter
