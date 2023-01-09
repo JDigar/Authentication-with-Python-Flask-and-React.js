@@ -17,6 +17,8 @@ value: /
 value: src/app.py
 - key: FLASK_ENV # Imported from Heroku app
 value: production
+- key: BACKEND_URL
+value: https://3001-jdigar-authenticationwi-rj6zwsz6sd5.ws-eu81.gitpod.io
 - key: DATABASE_URL # Render PostgreSQL database
 fromDatabase:
 name: postgresql-trapezoidal-42170
